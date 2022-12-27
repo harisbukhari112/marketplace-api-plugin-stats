@@ -1,0 +1,7 @@
+type totalCount {
+    result: Int
+}
+
+extend type Query {
+	totalProductsPurchased: totalCount
+}

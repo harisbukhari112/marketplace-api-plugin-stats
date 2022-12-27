@@ -1,5 +1,7 @@
 import { createRequire } from "module";
-
+import importAsString from "@reactioncommerce/api-utils/importAsString.js";
+import resolvers from "./resolvers.js";
+const schemas = importAsString("./schema.graphql")
 const require = createRequire(import.meta.url);
 const pkg = require("../package.json");
 
@@ -12,6 +14,10 @@ export default async function register(app) {
   await app.registerPlugin({
     label: pkg.label,
     name: pkg.name,
-    version: pkg.version
+    version: pkg.version,
+    graphQL: {
+      schemas: [schemas],
+      resolvers,
+    }
   });
 }
