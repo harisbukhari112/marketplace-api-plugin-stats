@@ -1,7 +1,11 @@
 type totalCount {
-    result: Int
+    totalProducts: Int
+    totalAmount: Int
+    avgAmount: Float
+    totalViews: Int
+
 }
 
 extend type Query {
-	totalProductsPurchased: totalCount
+	marketPlaceStats: totalCount
 }
