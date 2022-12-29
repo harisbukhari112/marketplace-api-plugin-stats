@@ -3,7 +3,7 @@ type totalCount {
     totalAmount: Int
     avgAmount: Float
     totalViews: Int
-
+    totalCarts: Int
 }
 
 extend type Query {

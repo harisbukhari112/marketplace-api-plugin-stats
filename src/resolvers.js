@@ -63,12 +63,31 @@ export default {
 				}
 			]).toArray();
 
-			console.log("totalAmount", totalAmount, "totalProducts", totalProducts, "avgAmount", avgAmount, "totalProductViews", totalProductViews)
+			let totalCarts = await Products.aggregate([
+				{ 
+					$match : { type : "simple" }
+				},
+				{
+					$project: {
+						_id: '1',
+						"totalCarts": { $sum : "$totalCarts" }
+					}
+				},
+				{
+					$group: {
+						_id: '1',
+						totalCarts: { $sum : "$totalCarts" }
+					}
+				}
+			]).toArray();
+
+			console.log("totalAmount", totalAmount, "totalProducts", totalProducts, "avgAmount", avgAmount, "totalProductViews", totalProductViews, "totalCarts", totalCarts)
 			return {
 				totalProducts,
 				totalAmount: totalAmount?.[0]?.totalAmount,
 				avgAmount: avgAmount?.[0]?.avgAmount,
-				totalViews: totalProductViews?.[0]?.totalViews
+				totalViews: totalProductViews?.[0]?.totalViews,
+				totalCarts: totalCarts?.[0]?.totalCarts
 			}
 		}
 	}
